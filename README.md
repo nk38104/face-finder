@@ -11,17 +11,19 @@ Face Finder is a web application that uses the Clarifai API to locate a face in 
   4.  Open new terminal and change directory to server directory(back-end) --> `cd ./server`
   5.  Run `npm install`
   6.  Now you can either:
- 
-          1. Add your own Clarifai API key directly in the `controllers/image.js` to connect to Clarifai API 
-                - You can grab Clarifai API key [here](https://www.clarifai.com/)
-          2. Add your own database credentials directly to `server.js` line 19
 
-          In this case you can move `dotenv` and `config` from the project
+          1. Add your own Clarifai API key directly in the `controllers/image.js` to connect to Clarifai API (line 6)
+
+          2. Add your own database credentials directly to `server.js` (line 19)
+
+        ** In this case you can move `dotenv` and `config` from the project.<br>
+        ** You can grab Clarifai API key [here](https://www.clarifai.com/).
     
-      OR (recommended)
+      #### OR (recommended)
     
           1. Make .env file in server directory
-          2. Init 4 variables in .env file
+
+          2. Initialize 4 variables in .env file
 
               NODE_ENV=development
               PORT=3000
@@ -29,7 +31,6 @@ Face Finder is a web application that uses the Clarifai API to locate a face in 
               POSTGRES_PASSWORD=YOUR_DATABASE_PASSWORD_HERE
     
   7.  Run `npm start` in both terminals you opened at steps 2 and 4 (server and client direcotry terminals, if you closed them do steps 2 and 4 again).
-
 ## Technologies Used
 
 ### Front-End
