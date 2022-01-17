@@ -1,0 +1,9 @@
+.tilt {
+    height: 150px;
+    width: 150px;
+    background: linear-gradient(89deg, #04c8de 0%, #04c8de 100%);
+}
+
+.logo-img {
+    padding-top: 5px;
+}

@@ -1,0 +1,11 @@
+.form {
+    width: 700px;
+}
+
+button {
+    background-color: #ffc7e1;
+}
+
+button:hover {
+    background-color: #04c8de;
+}
