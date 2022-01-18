@@ -13,11 +13,8 @@ const config    = require('./config/config');
 const database = knex({
     client: "pg",
     connection: {
-        host: "127.0.0.1",
-        user: "postgres",
-        port: 5432,
-        password: config.DATABASE_PASSWORD,
-        database: "smartbrain",
+        connectionString: process.env.DATABASE_URL,
+        ssl: true,
     }
 });
 
@@ -48,6 +45,6 @@ app.put("/image", (req, resp) => { image.handleImage(req, resp, database) });
 app.post("/image-detect", (req, resp) => { image.handleFaceDetectionAPICall(req, resp) });
 
 
-app.listen(config.PORT, () => {
+app.listen(config.PORT || 3000, () => {
     console.log(`App is running on port ${config.PORT}.`);
 });

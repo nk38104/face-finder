@@ -1,60 +1,70 @@
-# Face Finder
+# Getting Started with Create React App
 
-Face Finder is a web application that uses the Clarifai API to locate a face in a pciture. Using React.js for front-end, Node.js for backend with Express.js and PosrtgreSQL database for data storage (credentials, images scanned counter, ...). The user's rank gets upgraded every time user tries to detect a face in a picture.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## How to use the app
-  Steps:
-  
-  1.  Clone this repo
-  2.  Open your terminal and change directory to client directory(front-end) --> `cd ./client`
-  3.  Run `npm install`
-  4.  Open new terminal and change directory to server directory(back-end) --> `cd ./server`
-  5.  Run `npm install`
-  6.  Now you can either:
+## Available Scripts
 
-          1. Add your own Clarifai API key directly in the `controllers/image.js` to connect to Clarifai API (line 6)
+In the project directory, you can run:
 
-          2. Add your own database credentials directly to `server.js` (line 19)
+### `npm start`
 
-        ** In this case you can move `dotenv` and `config` from the project.<br>
-        ** You can grab Clarifai API key [here](https://www.clarifai.com/).
-    
-      #### OR (recommended)
-    
-          1. Make .env file in server directory
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-          2. Initialize 4 variables in .env file
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-              NODE_ENV=development
-              PORT=3000
-              CLARIFAI_API_KEY=YOUR_API_KEY_HERE
-              POSTGRES_PASSWORD=YOUR_DATABASE_PASSWORD_HERE
-    
-  7.  Run `npm start` in both terminals you opened at steps 2 and 4 (server and client direcotry terminals, if you closed them do steps 2 and 4 again).
-## Technologies Used
+### `npm test`
 
-### Front-End
-- HTML/5
-- CSS/3
-- React.js
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### Back-End
-- Node.js
-- Express.js
+### `npm run build`
 
-### NPM Packages
-- parallax-tilt
-- tsparticles
-- tachyons
-- bcryptjs
-- clarifai
-- cors
-- dotenv
-- express
-- knex
-- nodemon
-- pg (postgres)
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### APIs
-- [Clarifai](https://www.clarifai.com/)
-- [Face Finder API](https://github.com/nk38104/face-finder/tree/main/server)
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
