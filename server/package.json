@@ -4,8 +4,8 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "start": "node server.js",
-    "start:dev": "nodemon server.js",
+    "start":      "node server.js",
+    "start:dev":  "nodemon server.js",
     "build:ui": "cd ../client && npm run build --prod && xcopy /e /i \".\\build\" \"..\\build\""
   },
   "author": "Nikola Kelava",
