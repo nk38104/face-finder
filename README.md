@@ -1,6 +1,6 @@
 # Face Finder
 
-Face Finder is a web application that uses the Clarifai API to locate a face in a pciture. Using React.js for front-end, Node.js for backend with Express.js and PosrtgreSQL database for data storage (credentials, images scanned counter, ...). The user's rank gets upgraded every time user tries to detect a face in a picture.
+Face Finder is a PERN stack web application that uses the Clarifai API to locate a face in a pciture. React.js serves as the front-end, Node.js as backend server with Express.js and PosrtgreSQL database for data storage (credentials, images scanned counter, etc). The user's rank gets upgraded every time user tries to detect a face in a picture.
 
 ## How to use the app
   Steps:
