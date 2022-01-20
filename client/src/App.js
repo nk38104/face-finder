@@ -108,7 +108,7 @@ class App extends Component {
 		
 		return (
 			<div className="App">
-				<Particles	className="tsparticles" options={particles_options} />
+				{/* <Particles	className="tsparticles" options={particles_options} /> */}
 				<Navigation onRouteChange={this.onRouteChange} isSignedIn={isSignedIn}/>
 				{
 					(route === "home")
