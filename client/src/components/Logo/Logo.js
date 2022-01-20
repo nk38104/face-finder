@@ -1,6 +1,6 @@
 import React from 'react';
 import Tilt from 'react-parallax-tilt';
-import logoImage from './logo_image.png';
+import logoImage from './logo_image.svg';
 import './Logo.css';
 
 

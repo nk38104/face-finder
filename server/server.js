@@ -2,21 +2,17 @@ const express   = require("express");
 const bcrypt    = require('bcryptjs');
 const cors      = require("cors");
 const knex      = require("knex");
+const path      = require("path");
 const register  = require("./controllers/resgister");
 const signin    = require("./controllers/signin");
 const profile   = require("./controllers/profile");
 const image     = require("./controllers/image");
 const config    = require('./config/config');
+const db_config = require('./config/db_config');
 
 
-// Database connection settings
-const database = knex({
-    client: "pg",
-    connection: {
-        connectionString: process.env.DATABASE_URL,
-        ssl: true,
-    }
-});
+// Database connection configuration
+const database = knex(db_config.config);
 
 /*
     -------------
@@ -45,7 +41,14 @@ app.get("/profile/:id", (req, resp) => { profile.handleProfileGet(req, resp, dat
 app.put("/image", (req, resp) => { image.handleImage(req, resp, database) });
 app.post("/image-detect", (req, resp) => { image.handleFaceDetectionAPICall(req, resp) });
 
+// -------- deployment --------
 
-app.listen(config.PORT || 3000, () => {
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "/client/build")));
+    app.get("*", (req, resp) => resp.sendFile(path.resolve(__dirname, "client", "build", "index.html")));
+}
+// -------- deployment --------
+
+app.listen(config.PORT || 5000, () => {
     console.log(`App is running on port ${config.PORT}.`);
 });
