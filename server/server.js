@@ -9,13 +9,10 @@ const profile   = require("./controllers/profile");
 const image     = require("./controllers/image");
 const config    = require('./config/config');
 const db_config = require('./config/db_config');
-const { CLARIFAI_KEY } = require("./config/config");
 
 
 // Database connection configuration
 const database = knex(db_config.config);
-
-console.log(`db: ${config.DATABASE_URL}}`);
 
 /*
     -------------
@@ -38,6 +35,7 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
     app.get("*", (req, resp) => resp.sendFile(path.resolve(__dirname, "client", "build", "index.html")));
 }
+
 // -------- deployment --------
 
 // app.get("/", (req, resp) => { resp.send("Hello") });
@@ -53,4 +51,5 @@ app.post("/image-detect", (req, resp) => { image.handleFaceDetectionAPICall(req,
 
 app.listen(config.PORT || 5000, () => {
     console.log(`App is running on port ${config.PORT}.`);
+    console.log(`db: ${config.DATABASE_URL}`);
 });
