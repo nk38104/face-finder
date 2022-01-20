@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(cors());
 
 // app.get("/", (req, resp) => { resp.send(database.select("*").from("users")) });
-app.get("/", (req, resp) => { resp.send("Hello!") });
+app.get("/", (req, resp) => { signin.handleSignIn(req, resp, database, bcrypt) });
 
 app.post("/signin", (req, resp) => { signin.handleSignIn(req, resp, database, bcrypt) });
 
