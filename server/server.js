@@ -51,5 +51,4 @@ app.post("/image-detect", (req, resp) => { image.handleFaceDetectionAPICall(req,
 
 app.listen(config.PORT || 5000, () => {
     console.log(`App is running on port ${config.PORT}.`);
-    console.log(`db: ${config.DATABASE_URL}`);
 });

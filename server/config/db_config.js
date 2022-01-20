@@ -4,7 +4,9 @@ function getDbConnectionConfig() {
     if(config.NODE_ENV === "production") {
         return {
             connectionString: config.DATABASE_URL,
-            ssl: true,
+            ssl: {
+                rejectUnauthorized: false
+            },
         }
     } else {
         return {
