@@ -29,7 +29,15 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, resp) => { resp.send("Hello") });
+// -------- deployment --------
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "/client/build")));
+    app.get("*", (req, resp) => resp.sendFile(path.resolve(__dirname, "client", "build", "index.html")));
+}
+// -------- deployment --------
+
+// app.get("/", (req, resp) => { resp.send("Hello") });
 
 app.post("/signin", (req, resp) => { signin.handleSignIn(req, resp, database, bcrypt) });
 
@@ -39,14 +47,6 @@ app.get("/profile/:id", (req, resp) => { profile.handleProfileGet(req, resp, dat
 
 app.put("/image", (req, resp) => { image.handleImage(req, resp, database) });
 app.post("/image-detect", (req, resp) => { image.handleFaceDetectionAPICall(req, resp) });
-
-// -------- deployment --------
-
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "/client/build")));
-    app.get("*", (req, resp) => resp.sendFile(path.resolve(__dirname, "client", "build", "index.html")));
-}
-// -------- deployment --------
 
 app.listen(config.PORT || 5000, () => {
     console.log(`App is running on port ${config.PORT}.`);
