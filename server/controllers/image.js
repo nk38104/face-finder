@@ -3,7 +3,7 @@ const config    = require('../config/config');
 
 
 const clarifai = new Clarifai.App({
-	apiKey: config.CLARIFAI_API_KEY,
+	apiKey: config.CLARIFAI_KEY,
 });
 
 const handleFaceDetectionAPICall = (req, resp) => {
