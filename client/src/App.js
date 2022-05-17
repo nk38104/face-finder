@@ -1,7 +1,5 @@
 import './App.css';
 import React, { Component } from 'react';
-import particles_options from './tsparticles';
-import Particles from 'react-tsparticles';
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
@@ -108,7 +106,6 @@ class App extends Component {
 		
 		return (
 			<div className="App">
-				{/* <Particles	className="tsparticles" options={particles_options} /> */}
 				<Navigation onRouteChange={this.onRouteChange} isSignedIn={isSignedIn}/>
 				{
 					(route === "home")
