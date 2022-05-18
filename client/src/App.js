@@ -11,8 +11,8 @@ import Register from './components/Register/Register';
 
 const initialState = {
 	input: 		"",
-		imageUrl:	"",
-		box: 		{},
+	imageUrl:	"",
+	box: 		{},
 	route:		"signin",
 	isSignedIn:	false,
 	user: {
@@ -21,7 +21,8 @@ const initialState = {
 		email:      "",
 		entries:    0,
 		joined:     "",
-	}
+	},
+	baseURL: (process.env.NODE_ENV === "production") ? "https://face-finder-web-app.herokuapp.com" : "http://localhost:3000"
 }
 
 class App extends Component {
@@ -58,7 +59,9 @@ class App extends Component {
 	onRouteChange = (route) => {
 		if (route === "home") {
 			this.setState({ isSignedIn: true });
-		} else if (route === "signout") {
+		}
+		
+		if (route === "signout") {
 			this.setState(initialState);
 		}
 
@@ -76,7 +79,7 @@ class App extends Component {
   	onImageSubmit  = () => {
     	this.setState({ imageUrl: this.state.input });
 
-		fetch("https://face-finder-web-app.herokuapp.com/image-detect", {
+		fetch(`${baseURL}/image-detect`, {
 			method: "post",
 			headers:{"Content-Type": "application/json"},
 			body:   JSON.stringify({
@@ -86,7 +89,7 @@ class App extends Component {
 		.then(response => response.json())
 		.then(response => {
 			if (response) {
-				fetch("https://face-finder-web-app.herokuapp.com/image", {
+				fetch(`${baseURL}/image`, {
 					method: "put",
 					headers:{"Content-Type": "application/json"},
 					body:   JSON.stringify({
@@ -116,8 +119,8 @@ class App extends Component {
 							<FaceRecognition imageUrl={imageUrl} box={box} />
 						</div>
 					: 	((route === "signin")
-							? <SignIn	loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
-							: <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+							? <SignIn	loadUser={this.loadUser} onRouteChange={this.onRouteChange} baseURL={this.state.baseURL}/>
+							: <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} baseURL={this.state.baseURL}/>
 						)
 				}
 			</div>
