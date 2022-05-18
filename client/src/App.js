@@ -80,7 +80,7 @@ class App extends Component {
   	onImageSubmit  = () => {
     	this.setState({ imageUrl: this.state.input });
 
-		fetch(`${baseURL}/image-detect`, {
+		fetch(`${this.state.baseURL}/image-detect`, {
 			method: "post",
 			headers:{"Content-Type": "application/json"},
 			body:   JSON.stringify({
@@ -90,7 +90,7 @@ class App extends Component {
 		.then(response => response.json())
 		.then(response => {
 			if (response) {
-				fetch(`${baseURL}/image`, {
+				fetch(`${this.state.baseURL}/image`, {
 					method: "put",
 					headers:{"Content-Type": "application/json"},
 					body:   JSON.stringify({
