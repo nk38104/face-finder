@@ -5,11 +5,11 @@ const Navigation = ({ onRouteChange, isSignedIn }) => {
     if (isSignedIn) {
         return (
             <nav className="flex justify-end">
-                <p onClick={() => onRouteChange("signin")} className="f3 b link dim black underline pa3 pointer">Sign Out</p>
+                <p onClick={() => onRouteChange("signout")} className="f3 b link dim black underline pa3 pointer">Sign Out</p>
             </nav>
         );
     }
-    return (<></>)
+    return (<div className="mt6"></div>)
 }
 
 export default Navigation;
