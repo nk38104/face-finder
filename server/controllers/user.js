@@ -25,7 +25,7 @@ const updateUser = (req, resp, database) => {
     .increment("entries", 1)
     .returning("entries")
     .then(entries => {
-        resp.json({ entries: entries[0] });
+        resp.json(entries[0]);
     })
     .catch(() => resp.status(400).json("Error while trying to do the operation on db."));
 };

@@ -90,15 +90,12 @@ class App extends Component {
 		.then(response => response.json())
 		.then(response => {
 			if (response) {
-				fetch(`${this.state.baseURL}/image`, {
+				fetch(`${this.state.baseURL}/users/${this.state.user.id}`, {
 					method: "put",
 					headers:{"Content-Type": "application/json"},
-					body:   JSON.stringify({
-								id:	this.state.user.id
-							})
 				})
 				.then(response => response.json())
-				.then(count => { this.setState(Object.assign(this.state.user, { entries: count })) })
+				.then(count => { this.setState(Object.assign(this.state.user, { entries: count } ))})
 				.catch(err => console.log(err));
 			}
 			this.displayFaceBox(this.calculateFaceLocation(response))
