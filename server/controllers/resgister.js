@@ -1,5 +1,5 @@
 
-const handleRegister = (req, resp, database, bcrypt) => {
+const register = (req, resp, database, bcrypt) => {
     const { email, username, password } = req.body;
 
     if (!email || !username || !password) {
@@ -30,5 +30,5 @@ const handleRegister = (req, resp, database, bcrypt) => {
 };
 
 module.exports = {
-    handleRegister: handleRegister
+    register: register
 }

@@ -1,5 +1,5 @@
 
-const handleSignIn = (req, resp, database, bcrypt) => {
+const signIn = (req, resp, database, bcrypt) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -19,7 +19,7 @@ const handleSignIn = (req, resp, database, bcrypt) => {
             .then(user => {
                 resp.json(user[0]);
             })
-            .catch(() => resp.status(400).json("Unable to get user info."));
+            .catch(() => resp.status(400).json("Unable to get user information."));
         } else {
             resp.status(400).json("Wrong credentials.");
         }
@@ -28,5 +28,5 @@ const handleSignIn = (req, resp, database, bcrypt) => {
 };
 
 module.exports = {
-    handleSignIn: handleSignIn
+    signIn: signIn
 }

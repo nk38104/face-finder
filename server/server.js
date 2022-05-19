@@ -3,12 +3,12 @@ const bcrypt    = require('bcryptjs');
 const cors      = require("cors");
 const knex      = require("knex");
 const path      = require("path");
-const register  = require("./controllers/resgister");
-const signin    = require("./controllers/signin");
-const profile   = require("./controllers/profile");
-const image     = require("./controllers/image");
 const config    = require('./config/config');
 const db_config = require('./config/db_config');
+const userController      = require("./controllers/user");
+const registerController  = require("./controllers/resgister");
+const signinController    = require("./controllers/signin");
+const imageController     = require("./controllers/image");
 
 
 // Database connection configuration
@@ -31,23 +31,26 @@ if (process.env.NODE_ENV === "production") {
     -------------
     - ENDPOINTS -
     -------------
-    /                   --> resp with home page
-    /signin             --> POST, resp with succes||fail
-    /register           --> POST, new user
-    /profile/:userID    --> GET, resp with user page
-    /image              --> PUT, resp with updated user
+    /users              --> GET, resp with all users
+    /users/:id          --> GET, resp with user info
+    /users/:id          --> PUT, resp with updated user image detection count
+    /users/:id          --> DELETE, resp with succes || fail
+    /signin             --> POST, resp with user info
+    /register           --> POST, resp with new user info
+    /image-detect       --> POST, resp with face detection data
 */
 
-// app.get("/", (req, resp) => { resp.send("Hello") });
+app.get('/users', (req, resp) => { userController.getUsers(req, resp, database) });
+app.get("/users/:id", (req, resp) => { userController.getUser(req, resp, database) });
+app.put("/users/:id", (req, resp) => { userController.updateUser(req, resp, database) });
+app.delete("/users/:id", (req, resp) => { userController.deleteUser(req, resp, database) });
+    
+app.post("/signin", (req, resp) => { signinController.signIn(req, resp, database, bcrypt) });
 
-app.post("/signin", (req, resp) => { signin.handleSignIn(req, resp, database, bcrypt) });
+app.post("/register", (req, resp) => { registerController.register(req, resp, database, bcrypt) });
 
-app.post("/register", (req, resp) => { register.handleRegister(req, resp, database, bcrypt) });
+app.post("/image-detect", (req, resp) => { imageController.getFaceDetectionData(req, resp) });
 
-app.get("/profile/:id", (req, resp) => { profile.handleProfileGet(req, resp, database) });
-
-app.put("/image", (req, resp) => { image.handleImage(req, resp, database) });
-app.post("/image-detect", (req, resp) => { image.handleFaceDetectionAPICall(req, resp) });
 
 app.listen(config.PORT || 3000, () => {
     console.log(`App is running on port ${config.PORT}.`);
