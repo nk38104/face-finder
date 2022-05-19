@@ -6,7 +6,7 @@ const path      = require("path");
 const config    = require('./config/config');
 const db_config = require('./config/db_config');
 const userController      = require("./controllers/user");
-const registerController  = require("./controllers/resgister");
+const registerController  = require("./controllers/register");
 const signinController    = require("./controllers/signin");
 const imageController     = require("./controllers/image");
 

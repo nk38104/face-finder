@@ -16,13 +16,14 @@ const register = (req, resp, database, bcrypt) => {
         .into("login")
         .returning("email")
         .then(loginEmail => {
-            return trx("users").returning("*")
+            return trx("users")
+            .returning("*")
             .insert({
                 username:   username,
                 email:      loginEmail[0],
                 joined:     new Date()
             })
-            .then(user => { resp.json(user) })
+            .then(user => resp.json(user))
         })
         .then(trx.commit)
         .catch(trx.rollback);  

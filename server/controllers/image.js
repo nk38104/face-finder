@@ -10,7 +10,7 @@ const getFaceDetectionData = (req, resp) => {
     const { imageURL } = req.body;
 
     clarifai.models.predict(Clarifai.FACE_DETECT_MODEL, imageURL)
-    .then(data => { resp.json(data) })
+    .then(data => resp.json(data))
     .catch(err => resp.status(400).json(`Unable to work with face detection API!\n${err}`));
 }
 
