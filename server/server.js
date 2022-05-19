@@ -11,21 +11,18 @@ const signinController    = require("./controllers/signin");
 const imageController     = require("./controllers/image");
 
 
-// Database connection configuration
 const database = knex(db_config.config);
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-// -------- deployment --------
-
+// -------- DEPLOYMENT --------
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
     app.get("*", (req, resp) => resp.sendFile(path.resolve(__dirname, "client", "build", "index.html")));
 }
-
-// -------- deployment --------
+// ----------------------------
 
 /*
     -------------
@@ -36,7 +33,7 @@ if (process.env.NODE_ENV === "production") {
     /users/:id          --> PUT, resp with updated user image detection count
     /users/:id          --> DELETE, resp with succes || fail
     /signin             --> POST, resp with user info
-    /register           --> POST, resp with new user info
+    /register           --> POST, resp with created user info
     /image-detect       --> POST, resp with face detection data
 */
 
