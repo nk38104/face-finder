@@ -6,9 +6,3 @@
   display: flex;
   justify-content: center;
 }
-
-.tsparticles {
-  position: fixed;
-  inset: 0 0 0 0;
-  z-index: -1;
-}

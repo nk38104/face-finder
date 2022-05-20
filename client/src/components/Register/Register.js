@@ -39,7 +39,7 @@ class Register extends React.Component {
                 this.props.loadUser(user);
                 this.props.onRouteChange("signin");
             }
-        })
+        });
     }
 
     render() {
@@ -67,7 +67,7 @@ class Register extends React.Component {
                             <input onClick={this.onSubmitRegister} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Register" />
                         </div>
                         <div className="lh-copy mt3">
-                            <a href="#0" onClick={() => onRouteChange("signin")} className="f6 link dim black db">Sign In</a>
+                            <a href="#" onClick={() => onRouteChange("signin")} className="f6 link dim black db">Sign In</a>
                         </div>
                     </div>
                 </main>

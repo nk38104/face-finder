@@ -7,6 +7,7 @@ import Rank from './components/Rank/Rank';
 import Image from './components/Image/Image';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
+import UserProfile from './components/UserProfile/UserProfile';
 
 
 const initialState = {
@@ -117,10 +118,15 @@ class App extends Component {
 							<ImageLinkForm	 onInputChange={this.onInputChange} onImageSubmit={this.onImageSubmit} />
 							<Image imageUrl={imageUrl} boxes={boxes} />
 						</div>
-					: 	((route === "signin")
-							? <SignIn	loadUser={this.loadUser} onRouteChange={this.onRouteChange} baseURL={this.state.baseURL}/>
-							: <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} baseURL={this.state.baseURL}/>
-						)
+					: 	(route === "signin")
+							? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} baseURL={this.state.baseURL}/>
+							: (route === "profile")
+								?	<div>
+										<Logo />
+										<UserProfile onRouteChange={this.onRouteChange} userData={this.state.user} baseURL={this.state.baseURL} />
+									</div>
+								: <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} baseURL={this.state.baseURL}/>
+						
 				}
 			</div>
 		);

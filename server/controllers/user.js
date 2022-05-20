@@ -1,7 +1,7 @@
 
 const getUsers = (req, resp, database) => {
     database("users").then(data => resp.send(data));
-}
+};
 
 const getUser = (req, resp, database) => {
     const { id } = req.params;
@@ -35,10 +35,20 @@ const deleteUser = (req, resp, database) => {
 
     database("users")
     .where({ id: id })
+    .first()
+    .then(user => {
+        database("login")
+        .where({ email: user.email })
+        .del()
+        .catch(() => resp.status(400).json("Error while trying to do the operation on db."));
+    });
+
+    database("users")
+    .where({ id: id })
     .del()
     .then(() => resp.status(200).json("User deleted successfully"))
     .catch(() => resp.status(400).json("Error while trying to do the operation on db."));
-}
+};
 
 module.exports = {
     getUsers:   getUsers,
@@ -46,4 +56,3 @@ module.exports = {
     updateUser: updateUser,
     deleteUser: deleteUser
 }
-

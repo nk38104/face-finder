@@ -23,7 +23,7 @@ const register = (req, resp, database, bcrypt) => {
                 email:      loginEmail[0],
                 joined:     new Date()
             })
-            .then(user => resp.json(user))
+            .then(user => resp.json(user[0]))
         })
         .then(trx.commit)
         .catch(trx.rollback);  
