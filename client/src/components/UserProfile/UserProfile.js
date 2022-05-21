@@ -10,7 +10,6 @@ const UserProfile = ({ onRouteChange, userData, baseURL }) => {
             headers:{"Content-Type" : "application/json"},
         })
         .then(response => {
-            console.log("resp.status: ", typeof(response.status));
             response.status === 200 && onRouteChange("signout");  
         }) 
         .catch((err) => console.log(err));
