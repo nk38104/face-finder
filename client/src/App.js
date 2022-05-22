@@ -4,6 +4,7 @@ import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
+import Greeting from './components/Greeting/Greeting';
 import Image from './components/Image/Image';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
@@ -114,7 +115,8 @@ class App extends Component {
 					(route === "home")
 					?	<div>
 							<Logo />
-							<Rank username={this.state.user.username} entries={this.state.user.entries} />
+							{/* <Rank username={this.state.user.username} entries={this.state.user.entries} /> */}
+							<Greeting username={this.state.user.username} />
 							<ImageLinkForm	 onInputChange={this.onInputChange} onImageSubmit={this.onImageSubmit} />
 							<Image imageUrl={imageUrl} boxes={boxes} />
 						</div>
