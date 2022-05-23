@@ -2,7 +2,7 @@ import React from 'react';
 import FaceBox from './FaceBox/FaceBox';
 
 
-const FaceRecognition = ({ imageUrl, boxes }) => {
+const Image = ({ imageUrl, boxes }) => {
     return (
         <div className="center ma1">
             <div className="absolute mt2">
@@ -17,4 +17,4 @@ const FaceRecognition = ({ imageUrl, boxes }) => {
     );
 }
 
-export default FaceRecognition;
+export default Image;

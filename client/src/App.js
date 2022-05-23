@@ -1,10 +1,7 @@
 import './App.css';
 import React, { Component } from 'react';
 import Navigation from './components/Navigation/Navigation';
-import Logo from './components/Logo/Logo';
-import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
-import Greeting from './components/Greeting/Greeting';
-import Image from './components/Image/Image';
+import Home from './components/Home/Home';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
 import UserProfile from './components/UserProfile/UserProfile';
@@ -112,12 +109,13 @@ class App extends Component {
 				<Navigation onRouteChange={this.onRouteChange} isSignedIn={isSignedIn}/>
 				{
 					(route === "home")
-					?	<div>
-							<Logo />
-							<Greeting username={this.state.user.username} />
-							<ImageLinkForm	 onInputChange={this.onInputChange} onImageSubmit={this.onImageSubmit} />
-							<Image imageUrl={imageUrl} boxes={boxes} />
-						</div>
+					?	<Home 
+							username={this.state.user.username}
+							onInputChange={this.onInputChange}
+							onImageSubmit={this.onImageSubmit}
+							imageUrl={imageUrl}
+							boxes={boxes}
+						/>
 					: 	(route === "signin")
 							? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} baseURL={this.state.baseURL}/>
 							: (route === "profile")
