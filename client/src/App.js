@@ -119,10 +119,7 @@ class App extends Component {
 					: 	(route === "signin")
 							? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} baseURL={this.state.baseURL}/>
 							: (route === "profile")
-								?	<div>
-										<Logo />
-										<UserProfile onRouteChange={this.onRouteChange} userData={this.state.user} baseURL={this.state.baseURL} />
-									</div>
+								? <UserProfile onRouteChange={this.onRouteChange} userData={this.state.user} baseURL={this.state.baseURL} />
 								: <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} baseURL={this.state.baseURL}/>
 						
 				}

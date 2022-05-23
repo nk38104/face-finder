@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from './Logo/Logo';
+import Logo from '../Logo/Logo';
 import ImageLinkForm from './ImageLinkForm/ImageLinkForm';
 import Greeting from './Greeting/Greeting';
 import Image from './Image/Image';
