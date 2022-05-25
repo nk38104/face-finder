@@ -5,9 +5,9 @@ export const UserContext = createContext();
 
 const UserContextProvider = (props) => {
     return (
-        <UserContextProvider>
+        <UserContext.Provider>
         { props.children }
-        </UserContextProvider>
+        </UserContext.Provider>
     );
 };
 
