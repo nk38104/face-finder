@@ -3,10 +3,10 @@ import React, { createContext } from 'react';
 
 export const UserContext = createContext();
 
-const UserContextProvider = (props) => {
+const UserContextProvider = ({ children }) => {
     return (
         <UserContext.Provider>
-        { props.children }
+        { children }
         </UserContext.Provider>
     );
 };
