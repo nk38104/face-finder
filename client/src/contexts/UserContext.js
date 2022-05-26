@@ -1,7 +1,7 @@
 import React, { createContext } from 'react';
 
 
-export const UserContext = createContext();
+export const UserContext = createContext(null);
 
 const UserContextProvider = ({ children }) => {
     return (
