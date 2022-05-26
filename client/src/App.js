@@ -7,22 +7,6 @@ import Register from './components/Register/Register';
 import UserProfile from './components/UserProfile/UserProfile';
 
 
-// const initialState = {
-// 	input: 		"",
-// 	imageUrl:	"",
-// 	boxes:		[],
-// 	route:		"signin",
-// 	isSignedIn:	false,
-// 	user: {
-// 		id:         "",
-// 		username:   "",
-// 		email:      "",
-// 		entries:    0,
-// 		joined:     "",
-// 	},
-// 	baseURL: (process.env.NODE_ENV === "production") ? "https://face-finder-web-app.herokuapp.com" : "http://localhost:3000"
-// }
-
 const initUser = {
 	id:         "",
 	username:   "",
@@ -40,6 +24,15 @@ const App = () => {
 	const [boxes, setBoxes] = useState([]);
 	const baseURL = (process.env.NODE_ENV === "production") ? "https://face-finder-web-app.herokuapp.com" : "http://localhost:3000";
 
+	const logout = () => {
+		setRoute("signin");
+		setLogged(false);
+		setInput("");
+		setUser(initUser);
+		setImageUrl("");
+		setBoxes([]);
+	}
+
 	const loadUser = (userData) => {
 		setUser(userData);
 	}
@@ -52,12 +45,7 @@ const App = () => {
 		}
 
 		if (nextRoute === "signout") {
-			setRoute("signin");
-			setLogged(false);
-			setInput("");
-			setUser(initUser);
-			setImageUrl("");
-			setBoxes([]);
+			logout();
 		}
 	}
 
@@ -97,13 +85,12 @@ const App = () => {
 		.then(response => response.json())
 		.then(response => {
 			if (response) {
-				console.log(response);
 				fetch(`${baseURL}/users/${user.id}`, {
 					method: "put",
 					headers:{"Content-Type": "application/json"},
 				})
 				.then(response => response.json())
-				.then(count => { setUser(Object.assign(user, { entries: count } ))})
+				.then(count => { setUser({ ...user, entries: count })})
 				.catch(err => console.log(err));
 			}
 			setFaceBoxes(calculateFaceLocations(response));
