@@ -7,9 +7,9 @@ const clarifai = new Clarifai.App({
 });
 
 const getFaceDetectionData = (req, resp) => {
-    const { imageURL } = req.body;
+    const { imageUrl } = req.body;
 
-    clarifai.models.predict(Clarifai.FACE_DETECT_MODEL, imageURL)
+    clarifai.models.predict(Clarifai.FACE_DETECT_MODEL, imageUrl)
     .then(data => resp.json(data))
     .catch(err => resp.status(400).json(`Unable to work with face detection API!\n${err}`));
 }

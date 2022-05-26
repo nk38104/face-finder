@@ -3,9 +3,30 @@ import React, { createContext } from 'react';
 
 export const UserContext = createContext(null);
 
+const initialUserState = {
+	user: {
+		id:         "",
+		username:   "",
+		email:      "",
+		entries:    0,
+		joined:     "",
+		isLogged:	false
+	}
+}
+
 const UserContextProvider = ({ children }) => {
+	const [user, setUser] = useState(initialState);
+
+	const login = (userInfo) => {
+		setUser({ ...userInfo, isLogged: true });
+	}
+
+	const logout = () => {
+		setUser(initialUserState);
+	}
+
     return (
-        <UserContext.Provider>
+        <UserContext.Provider value={{ user, login, logout }}>
         { children }
         </UserContext.Provider>
     );

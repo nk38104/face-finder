@@ -1,8 +1,8 @@
 import React from 'react';
 
 
-const Navigation = ({ onRouteChange, isSignedIn }) => {
-    if (isSignedIn) {
+const Navigation = ({ onRouteChange, isLogged }) => {
+    if (isLogged) {
         return (
             <nav className="flex justify-end">
                 <p onClick={() => onRouteChange("home")} className="f3 b link dim black underline pa3 pointer">Home</p>

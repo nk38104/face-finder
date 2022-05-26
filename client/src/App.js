@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
 import SignIn from './components/SignIn/SignIn';
@@ -7,57 +7,65 @@ import Register from './components/Register/Register';
 import UserProfile from './components/UserProfile/UserProfile';
 
 
-const initialState = {
-	input: 		"",
-	imageUrl:	"",
-	boxes:		[],
-	route:		"signin",
-	isSignedIn:	false,
-	user: {
-		id:         "",
-		username:   "",
-		email:      "",
-		entries:    0,
-		joined:     "",
-	},
-	baseURL: (process.env.NODE_ENV === "production") ? "https://face-finder-web-app.herokuapp.com" : "http://localhost:3000"
+// const initialState = {
+// 	input: 		"",
+// 	imageUrl:	"",
+// 	boxes:		[],
+// 	route:		"signin",
+// 	isSignedIn:	false,
+// 	user: {
+// 		id:         "",
+// 		username:   "",
+// 		email:      "",
+// 		entries:    0,
+// 		joined:     "",
+// 	},
+// 	baseURL: (process.env.NODE_ENV === "production") ? "https://face-finder-web-app.herokuapp.com" : "http://localhost:3000"
+// }
+
+const initUser = {
+	id:         "",
+	username:   "",
+	email:      "",
+	entries:    0,
+	joined:     ""
 }
 
-class App extends Component {
-  	constructor() {
-    	super();
-		this.state = initialState;
-    	
-  	}
+const App = () => {
+	const [isLogged, setLogged] = useState(false);
+	const [input, setInput] = useState("");
+	const [route, setRoute] = useState("signin");
+	const [user, setUser] = useState(initUser);
+	const [imageUrl, setImageUrl] = useState("");
+	const [boxes, setBoxes] = useState([]);
+	const baseURL = (process.env.NODE_ENV === "production") ? "https://face-finder-web-app.herokuapp.com" : "http://localhost:3000";
 
-	loadUser = (userData) => {
-		this.setState({ user: {
-			id:         userData.id,
-			username:   userData.username,
-			email:      userData.email,
-			entries:    userData.entries,
-			joined:     userData.joined,
-		}});
+	const loadUser = (userData) => {
+		setUser(userData);
 	}
 
-	onRouteChange = (route) => {
-		if (route === "home") {
-			this.setState({ isSignedIn: true });
+	const onRouteChange = (nextRoute) => {
+		setRoute(nextRoute);
+
+		if (nextRoute === "home") {
+			setLogged(true);
 		}
 
-		if (route === "signout") {
-			route = "signin";
-			this.setState(initialState);
+		if (nextRoute === "signout") {
+			setRoute("signin");
+			setLogged(false);
+			setInput("");
+			setUser(initUser);
+			setImageUrl("");
+			setBoxes([]);
 		}
-
-		this.setState({ route: route });
 	}
 
-	calculateFaceLocations = (data) => {
+	const calculateFaceLocations = (data) => {
 		const clarifaiFaceRegions = data.outputs[0].data.regions.map(region => region.region_info.bounding_box);
 		const image = document.getElementById("input-img");
 		const [width, height] =  [Number(image.width), Number(image.height)];
-		
+
 		return clarifaiFaceRegions.map(faceRegion => {
 			return {
 				leftCol:  	faceRegion.left_col * width,
@@ -65,67 +73,63 @@ class App extends Component {
 				rightCol:	width - (faceRegion.right_col * width),
 				bottomRow:	height - (faceRegion.bottom_row * height) + 50
 			}
-		});	
+		});
   	}
 
-	setFaceBoxes = (faceBoxes) => {
-		this.setState({ boxes: faceBoxes });
+	const setFaceBoxes = (faceBoxes) => {
+		setBoxes(faceBoxes);
 	}
 
-	onInputChange = (event) => {
-		this.setState({ input: event.target.value })
+	const onInputChange = (event) => {
+		setInput(event.target.value);		
 	}
 
-  	onImageSubmit  = () => {
-    	this.setState({ imageUrl: this.state.input });
+  	const onImageSubmit  = () => {
+		setImageUrl(input);
 
-		fetch(`${this.state.baseURL}/image-detect`, {
+		fetch(`${baseURL}/image-detect`, {
 			method: "post",
 			headers:{"Content-Type": "application/json"},
 			body:   JSON.stringify({
-						imageURL:	this.state.input
+						imageUrl:	input
 					})
 		})
 		.then(response => response.json())
 		.then(response => {
 			if (response) {
-				fetch(`${this.state.baseURL}/users/${this.state.user.id}`, {
+				console.log(response);
+				fetch(`${baseURL}/users/${user.id}`, {
 					method: "put",
 					headers:{"Content-Type": "application/json"},
 				})
 				.then(response => response.json())
-				.then(count => { this.setState(Object.assign(this.state.user, { entries: count } ))})
+				.then(count => { setUser(Object.assign(user, { entries: count } ))})
 				.catch(err => console.log(err));
 			}
-			this.setFaceBoxes(this.calculateFaceLocations(response))
+			setFaceBoxes(calculateFaceLocations(response));
 		}).catch(err => console.log(err));
 	}
 
-	render() {
-		const { isSignedIn, imageUrl, route, boxes } = this.state;
-		
-		return (
-			<div className="App">
-				<Navigation onRouteChange={this.onRouteChange} isSignedIn={isSignedIn}/>
-				{
-					(route === "home")
-					?	<Home 
-							username={this.state.user.username}
-							onInputChange={this.onInputChange}
-							onImageSubmit={this.onImageSubmit}
-							imageUrl={imageUrl}
-							boxes={boxes}
-						/>
-					: 	(route === "signin")
-							? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} baseURL={this.state.baseURL}/>
-							: (route === "profile")
-								? <UserProfile onRouteChange={this.onRouteChange} userData={this.state.user} baseURL={this.state.baseURL} />
-								: <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} baseURL={this.state.baseURL}/>
-						
-				}
-			</div>
-		);
-	}
+	return (
+		<div className="App">
+			<Navigation onRouteChange={onRouteChange} isLogged={isLogged}/>
+			{
+				(route === "home")
+				?	<Home
+						username={user.username}
+						onInputChange={onInputChange}
+						onImageSubmit={onImageSubmit}
+						imageUrl={imageUrl}
+						boxes={boxes}
+					/>
+				: 	(route === "signin")
+						? <SignIn loadUser={loadUser} onRouteChange={onRouteChange} baseURL={baseURL}/>
+						: (route === "profile")
+							? <UserProfile onRouteChange={onRouteChange} userData={user} baseURL={baseURL} />
+							: <Register loadUser={loadUser} onRouteChange={onRouteChange} baseURL={baseURL}/>
+			}
+		</div>
+	);
 }
 
 export default App;
