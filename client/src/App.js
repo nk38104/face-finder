@@ -34,10 +34,6 @@ const App = () => {
 		setBoxes([]);
 	}
 
-	const loadUser = (userData) => {
-		setUser(userData);
-	}
-
 	const onRouteChange = (nextRoute) => {
 		setRoute(nextRoute);
 
@@ -113,7 +109,7 @@ const App = () => {
 				: 	(route === "signin")
 						? <SignIn onRouteChange={onRouteChange} baseURL={baseURL}/>
 						: (route === "profile")
-							? <UserProfile onRouteChange={onRouteChange} userData={user} baseURL={baseURL} />
+							? <UserProfile onRouteChange={onRouteChange} baseURL={baseURL} />
 							: <Register onRouteChange={onRouteChange} baseURL={baseURL}/>					
 		}
 			</UserContextProvider>

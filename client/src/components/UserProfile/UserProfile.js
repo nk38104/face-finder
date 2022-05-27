@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 import Logo from '../Logo/Logo';
 
 
-const UserProfile = ({ onRouteChange, userData, baseURL }) => {
-    const joined = new Date(userData.joined);
+const UserProfile = ({ onRouteChange, baseURL }) => {
+    const { user } = useContext(UserContext);
+    const joined = new Date(user.joined);
 
     const onSubmitDelete = () => {
-        fetch(`${baseURL}/users/${userData.id}`, {
+        fetch(`${baseURL}/users/${user.id}`, {
             method: "delete",
             headers:{"Content-Type" : "application/json"},
         })
@@ -25,13 +27,13 @@ const UserProfile = ({ onRouteChange, userData, baseURL }) => {
                         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                             <legend className="f1 fw6 ph0 mh0">User Profile</legend>
                             <div className="mt4">
-                                <p className="db fw6 lh-copy f6">Username: {userData.username}</p>
+                                <p className="db fw6 lh-copy f6">Username: {user.username}</p>
                             </div>
                             <div className="mv3">
-                                <p className="db fw6 lh-copy f6">Email: {userData.email}</p>
+                                <p className="db fw6 lh-copy f6">Email: {user.email}</p>
                             </div>
                             <div className="mv3">
-                                <p className="db fw6 lh-copy f6">Seach Counter: {userData.entries}</p>
+                                <p className="db fw6 lh-copy f6">Seach Counter: {user.entries}</p>
                             </div>
                             <div className="mv3">
                                 <p className="db fw6 lh-copy f6">Joined: {`${joined.getDate() - 1}/${joined.getMonth()+1}/${joined.getFullYear()}`}</p>
