@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../../../contexts/UserContext';
 
 
-const Greeting = ({ username }) => {
+const Greeting = () => {
+    const { user } = useContext(UserContext);
+
     return (
         <div className="black f1">
-            {`Welcome, ${username}!`}
+            {`Welcome, ${user.username}!`}
         </div>
     );
 }

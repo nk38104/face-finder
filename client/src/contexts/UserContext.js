@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { useState, createContext } from 'react';
 
 
 export const UserContext = createContext(null);
@@ -15,10 +15,10 @@ const initialUserState = {
 }
 
 const UserContextProvider = ({ children }) => {
-	const [user, setUser] = useState(initialState);
+	const [user, setUser] = useState(initialUserState);
 
-	const login = (userInfo) => {
-		setUser({ ...userInfo, isLogged: true });
+	const login = (userData) => {
+		setUser({ ...userData, isLogged: true });
 	}
 
 	const logout = () => {

@@ -1,10 +1,13 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 
 
 export const ImageContext = createContext(null);
 
 const ImageContextProvider = ({ children }) => {
-    return(
+    const [imageUrl, setImageUrl] = useState("");
+    const [boxes, setBoxes] = useState([]);
+
+    return (
         <ImageContext.Provider value={{}}>
             { children }
         </ImageContext.Provider>

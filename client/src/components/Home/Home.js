@@ -5,11 +5,11 @@ import Greeting from './Greeting/Greeting';
 import Image from './Image/Image';
 
 
-const Home = ({ username, onInputChange, onImageSubmit, imageUrl, boxes }) => {
+const Home = ({ onInputChange, onImageSubmit, imageUrl, boxes }) => {
     return (
         <div>
             <Logo />
-            <Greeting username={username} />
+            <Greeting />
             <ImageLinkForm onInputChange={onInputChange} onImageSubmit={onImageSubmit} />
             <Image imageUrl={imageUrl} boxes={boxes} />
         </div>

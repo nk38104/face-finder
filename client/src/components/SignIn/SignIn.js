@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 
 
-const SignIn = ({ loadUser, onRouteChange, baseURL }) => {
+const SignIn = ({ onRouteChange, baseURL }) => {
+    const { login } = useContext(UserContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -25,7 +27,7 @@ const SignIn = ({ loadUser, onRouteChange, baseURL }) => {
         .then(response => response.json())
         .then(user => {
             if (user.id) {
-                loadUser(user);
+                login(user);
                 onRouteChange("home");
             }
         });

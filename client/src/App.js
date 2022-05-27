@@ -5,6 +5,7 @@ import Home from './components/Home/Home';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
 import UserProfile from './components/UserProfile/UserProfile';
+import UserContextProvider from './contexts/UserContext';
 
 
 const initUser = {
@@ -100,21 +101,22 @@ const App = () => {
 	return (
 		<div className="App">
 			<Navigation onRouteChange={onRouteChange} isLogged={isLogged}/>
-			{
+			<UserContextProvider>
+			{	
 				(route === "home")
 				?	<Home
-						username={user.username}
 						onInputChange={onInputChange}
 						onImageSubmit={onImageSubmit}
 						imageUrl={imageUrl}
 						boxes={boxes}
 					/>
 				: 	(route === "signin")
-						? <SignIn loadUser={loadUser} onRouteChange={onRouteChange} baseURL={baseURL}/>
+						? <SignIn onRouteChange={onRouteChange} baseURL={baseURL}/>
 						: (route === "profile")
 							? <UserProfile onRouteChange={onRouteChange} userData={user} baseURL={baseURL} />
-							: <Register loadUser={loadUser} onRouteChange={onRouteChange} baseURL={baseURL}/>
-			}
+							: <Register loadUser={loadUser} onRouteChange={onRouteChange} baseURL={baseURL}/>					
+		}
+			</UserContextProvider>
 		</div>
 	);
 }
