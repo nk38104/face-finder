@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-const Register = ({ loadUser,  onRouteChange,  baseURL }) =>  {
+const Register = ({ onRouteChange,  baseURL }) =>  {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -31,7 +31,6 @@ const Register = ({ loadUser,  onRouteChange,  baseURL }) =>  {
         .then(response => response.json())
         .then(user => {
             if (user.id) {
-                loadUser(user);
                 onRouteChange("signin");
             }
         });

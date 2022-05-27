@@ -114,7 +114,7 @@ const App = () => {
 						? <SignIn onRouteChange={onRouteChange} baseURL={baseURL}/>
 						: (route === "profile")
 							? <UserProfile onRouteChange={onRouteChange} userData={user} baseURL={baseURL} />
-							: <Register loadUser={loadUser} onRouteChange={onRouteChange} baseURL={baseURL}/>					
+							: <Register onRouteChange={onRouteChange} baseURL={baseURL}/>					
 		}
 			</UserContextProvider>
 		</div>
