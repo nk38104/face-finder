@@ -96,8 +96,8 @@ const App = () => {
 
 	return (
 		<div className="App">
-			<Navigation onRouteChange={onRouteChange} isLogged={isLogged}/>
 			<UserContextProvider>
+			<Navigation onRouteChange={onRouteChange} />
 			{	
 				(route === "home")
 				?	<Home
