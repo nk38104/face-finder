@@ -7,7 +7,7 @@ const Navigation = ({ onRouteChange }) => {
 
     const signout = () => {
         logout();
-        onRouteChange("signout");
+        onRouteChange("signin");
     }
 
     if (user.isLogged) {
