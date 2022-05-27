@@ -3,15 +3,18 @@ import Logo from '../Logo/Logo';
 import ImageLinkForm from './ImageLinkForm/ImageLinkForm';
 import Greeting from './Greeting/Greeting';
 import Image from './Image/Image';
+import ImageContextProvider from '../../contexts/ImageContext';
 
 
-const Home = ({ onInputChange, onImageSubmit, imageUrl, boxes }) => {
+const Home = ({ baseURL }) => {
     return (
         <div>
-            <Logo />
-            <Greeting />
-            <ImageLinkForm onInputChange={onInputChange} onImageSubmit={onImageSubmit} />
-            <Image imageUrl={imageUrl} boxes={boxes} />
+            <ImageContextProvider>
+                <Logo />
+                <Greeting />
+                <ImageLinkForm baseURL={baseURL} />
+                <Image />
+            </ImageContextProvider>
         </div>
     );
 };

@@ -25,8 +25,18 @@ const UserContextProvider = ({ children }) => {
 		setUser(initialUserState);
 	}
 
+	const incrementEntries = (baseURL) => {
+		fetch(`${baseURL}/users/${user.id}`, {
+			method: "put",
+			headers:{"Content-Type": "application/json"},
+		})
+		.then(response => response.json())
+		.then(count => { setUser({ ...user, entries: count })})
+		.catch(err => console.log(err));
+	}
+
     return (
-        <UserContext.Provider value={{ user, login, logout }}>
+        <UserContext.Provider value={{ user, login, logout, incrementEntries }}>
         { children }
         </UserContext.Provider>
     );

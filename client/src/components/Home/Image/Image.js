@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ImageContext } from '../../../contexts/ImageContext';
 import FaceBox from './FaceBox/FaceBox';
 
 
-const Image = ({ imageUrl, boxes }) => {
+const Image = () => {
+    const { imageUrl, boxes } = useContext(ImageContext);
+    
     return (
         <div className="center ma1">
             <div className="absolute mt2">

@@ -1,8 +1,37 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { UserContext } from '../../../contexts/UserContext';
+import { ImageContext } from '../../../contexts/ImageContext';
 import './ImageLinkForm.css';
 
 
-const ImageLinkForm = ({ onInputChange, onImageSubmit }) => {
+const ImageLinkForm = ({ baseURL }) => {
+    const [input, setInput] = useState("");
+    const { incrementEntries } = useContext(UserContext);
+    const { setImageUrl, setFaceBoxes } = useContext(ImageContext);
+
+    const onInputChange = (event) => {
+		setInput(event.target.value);		
+	}
+    
+    const onImageSubmit  = () => {
+		setImageUrl(input);
+
+		fetch(`${baseURL}/image-detect`, {
+			method: "post",
+			headers:{"Content-Type": "application/json"},
+			body:   JSON.stringify({
+						imageUrl:	input
+					})
+		})
+		.then(response => response.json())
+		.then(response => {
+			if (response) {
+				incrementEntries(baseURL);
+			}
+			setFaceBoxes(response);
+		}).catch(err => console.log(err));
+	}
+
     return (
         <div>
             <p className="f3">
