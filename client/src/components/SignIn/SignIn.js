@@ -15,8 +15,8 @@ const SignIn = ({ onRouteChange, baseURL }) => {
         setPassword(event.target.value);
     }
 
-    const onSubmitSignIn = () => {
-        fetch(`${baseURL}/signin`, {
+    const onSubmitSignIn = async () => {
+        await fetch(`${baseURL}/signin`, {
             method: "post",
             headers:{"Content-Type" : "application/json"},
             body:   JSON.stringify({

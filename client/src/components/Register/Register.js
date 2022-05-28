@@ -18,8 +18,8 @@ const Register = ({ onRouteChange,  baseURL }) =>  {
         setPassword(event.target.value);
     }
 
-    const onSubmitRegister = () => {
-        fetch(`${baseURL}/register`, {
+    const onSubmitRegister = async () => {
+        await fetch(`${baseURL}/register`, {
             method: "post",
             headers:{"Content-Type" : "application/json"},
             body:   JSON.stringify({

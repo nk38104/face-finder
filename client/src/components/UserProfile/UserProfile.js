@@ -7,8 +7,8 @@ const UserProfile = ({ onRouteChange, baseURL }) => {
     const { user } = useContext(UserContext);
     const joined = new Date(user.joined);
 
-    const onSubmitDelete = () => {
-        fetch(`${baseURL}/users/${user.id}`, {
+    const onSubmitDelete = async () => {
+        await fetch(`${baseURL}/users/${user.id}`, {
             method: "delete",
             headers:{"Content-Type" : "application/json"},
         })

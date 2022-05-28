@@ -25,8 +25,8 @@ const UserContextProvider = ({ children }) => {
 		setUser(initialUserState);
 	}
 
-	const incrementEntries = (baseURL) => {
-		fetch(`${baseURL}/users/${user.id}`, {
+	const incrementEntries = async (baseURL) => {
+		await fetch(`${baseURL}/users/${user.id}`, {
 			method: "put",
 			headers:{"Content-Type": "application/json"},
 		})

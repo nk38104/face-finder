@@ -13,10 +13,10 @@ const ImageLinkForm = ({ baseURL }) => {
 		setInput(event.target.value);		
 	}
     
-    const onImageSubmit  = () => {
+    const onImageSubmit  = async () => {
 		setImageUrl(input);
 
-		fetch(`${baseURL}/image-detect`, {
+		await fetch(`${baseURL}/image-detect`, {
 			method: "post",
 			headers:{"Content-Type": "application/json"},
 			body:   JSON.stringify({
