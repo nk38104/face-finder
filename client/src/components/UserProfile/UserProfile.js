@@ -4,7 +4,7 @@ import Logo from '../Logo/Logo';
 
 
 const UserProfile = ({ onRouteChange, baseURL }) => {
-    const { user } = useContext(UserContext);
+    const { user, logout } = useContext(UserContext);
     const joined = new Date(user.joined);
 
     const onSubmitDelete = async () => {
@@ -13,7 +13,8 @@ const UserProfile = ({ onRouteChange, baseURL }) => {
             headers:{"Content-Type" : "application/json"},
         })
         .then(response => {
-            response.status === 200 && onRouteChange("signout");  
+            logout();
+            response.status === 200 && onRouteChange("signin");  
         }) 
         .catch((err) => console.log(err));
     }
