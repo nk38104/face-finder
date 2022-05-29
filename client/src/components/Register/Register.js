@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-
-const Register = ({ onRouteChange,  baseURL }) =>  {
+const Register = ({ baseURL }) =>  {
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -31,7 +32,7 @@ const Register = ({ onRouteChange,  baseURL }) =>  {
         .then(response => response.json())
         .then(user => {
             if (user.id) {
-                onRouteChange("signin");
+                navigate("/signin");
             }
         });
     }
@@ -59,7 +60,7 @@ const Register = ({ onRouteChange,  baseURL }) =>  {
                         <input onClick={onSubmitRegister} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Register" />
                     </div>
                     <div className="lh-copy mt3">
-                        <a href="#" onClick={() => onRouteChange("signin")} className="f6 link dim black db">Sign In</a>
+                        <Link to="/signin" className="f6 link dim black db">Sign in</Link>
                     </div>
                 </div>
             </main>

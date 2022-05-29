@@ -36,7 +36,7 @@ const UserContextProvider = ({ children }) => {
 	}
 
     return (
-        <UserContext.Provider value={{ user, login, logout, incrementEntries }}>
+        <UserContext.Provider value={{ user, login, logout, incrementEntries, isAuthenticated: user.isLogged }}>
         { children }
         </UserContext.Provider>
     );

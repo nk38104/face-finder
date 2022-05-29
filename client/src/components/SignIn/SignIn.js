@@ -1,8 +1,10 @@
 import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 
 
-const SignIn = ({ onRouteChange, baseURL }) => {
+const SignIn = ({ baseURL }) => {
+    const navigate = useNavigate();
     const { login } = useContext(UserContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -28,7 +30,7 @@ const SignIn = ({ onRouteChange, baseURL }) => {
         .then(user => {
             if (user.id) {
                 login(user);
-                onRouteChange("home");
+                navigate("/");
             }
         });
     }
@@ -52,7 +54,7 @@ const SignIn = ({ onRouteChange, baseURL }) => {
                         <input onClick={onSubmitSignIn} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Sign in" />
                     </div>
                     <div className="lh-copy mt3">
-                        <a onClick={() => onRouteChange("register")} href="#0" className="f6 link dim black db">Register</a>
+                        <Link to="/register" className="f6 link dim black db">Register</Link>
                     </div>
                 </div>
             </main>

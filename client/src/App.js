@@ -1,5 +1,6 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
 import SignIn from './components/SignIn/SignIn';
@@ -9,26 +10,20 @@ import UserContextProvider from './contexts/UserContext';
 
 
 const App = () => {
-	const [route, setRoute] = useState("signin");
 	const baseURL = (process.env.NODE_ENV === "production") ? "https://face-finder-web-app.herokuapp.com" : "http://localhost:3000";
-
-	const onRouteChange = (nextRoute) => {
-		setRoute(nextRoute);
-	}
 
 	return (
 		<div className="App">
 			<UserContextProvider>
-			<Navigation onRouteChange={onRouteChange} />
-			{	
-				(route === "home")
-				?	<Home baseURL={baseURL} />
-				: 	(route === "signin")
-						? <SignIn onRouteChange={onRouteChange} baseURL={baseURL} />
-						: (route === "profile")
-							? <UserProfile onRouteChange={onRouteChange} baseURL={baseURL} />
-							: <Register onRouteChange={onRouteChange} baseURL={baseURL} />
-		}
+			<BrowserRouter>
+				<Navigation />
+				<Routes>
+					<Route exect path="/" element={ <Home baseURL={baseURL} /> } />
+					<Route exect path="/signin" element={ <SignIn baseURL={baseURL} /> } />
+					<Route exect path="/register" element={ <Register baseURL={baseURL} /> } />
+					<Route exect path="/user-profile" element={ <UserProfile baseURL={baseURL} /> } />
+				</Routes>
+			</BrowserRouter>
 			</UserContextProvider>
 		</div>
 	);

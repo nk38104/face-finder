@@ -11,8 +11,8 @@ const Image = () => {
             <div className="absolute mt2">
                 <img id="input-img" className="mb5 br1" src={imageUrl} alt="" width="500px" height="auto" />
                 {
-                    boxes.map(box => {
-                        return <FaceBox box={box} />;
+                    boxes.map((box, index) => {
+                        return <FaceBox key={index} box={box} />;
                     })
                 }
             </div>

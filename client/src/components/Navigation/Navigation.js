@@ -1,21 +1,23 @@
 import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 
 
-const Navigation = ({ onRouteChange }) => {
-    const { user, logout } = useContext(UserContext);
+const Navigation = () => {
+    const navigate = useNavigate();
+    const { isAuthenticated, logout } = useContext(UserContext);
 
     const signout = () => {
         logout();
-        onRouteChange("signin");
+        navigate("/signin");
     }
 
-    if (user.isLogged) {
+    if (isAuthenticated) {
         return (
             <nav className="flex justify-end">
-                <p onClick={() => onRouteChange("home")} className="f3 b link dim black underline pa3 pointer">Home</p>
-                <p onClick={() => onRouteChange("profile")} className="f3 b link dim black underline pa3 pointer">User Profile</p>
-                <p onClick={signout} className="f3 b link dim black underline pa3 pointer">Sign Out</p>
+                <Link to="/" className="f3 b link dim black underline pa3 pointer">Home</Link>
+                <Link to="user-profile" className="f3 b link dim black underline pa3 pointer">Profile</Link>
+                <Link to="/signin" onClick={signout} className="f3 b link dim black underline pa3 pointer">Sign Out</Link>
             </nav>
         );
     }

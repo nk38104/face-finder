@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import Logo from '../Logo/Logo';
 
 
-const UserProfile = ({ onRouteChange, baseURL }) => {
+const UserProfile = ({ baseURL }) => {
+    const navigate = useNavigate();
     const { user, logout } = useContext(UserContext);
     const joined = new Date(user.joined);
 
@@ -14,7 +16,9 @@ const UserProfile = ({ onRouteChange, baseURL }) => {
         })
         .then(response => {
             logout();
-            response.status === 200 && onRouteChange("signin");  
+            if (response.status === 200) {
+                navigate("/signin")
+            }
         }) 
         .catch((err) => console.log(err));
     }
