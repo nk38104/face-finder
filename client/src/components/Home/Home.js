@@ -14,9 +14,9 @@ const Home = ({ baseURL }) => {
     return (isAuthenticated)
         ? (
             <div>
+                <Logo />
+                <Greeting />
                 <ImageContextProvider>
-                    <Logo />
-                    <Greeting />
                     <ImageLinkForm baseURL={baseURL} />
                     <Image />
                 </ImageContextProvider>

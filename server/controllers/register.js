@@ -23,13 +23,14 @@ const register = (req, resp, database, bcrypt) => {
                 email:      loginEmail[0],
                 joined:     new Date()
             })
-            .then(user => resp.json(user[0]))
+            .then(user => resp.json(user[0]));
         })
         .then(trx.commit)
         .catch(trx.rollback);  
-    }).catch((err) => resp.status(400).json(`Unable to register. ${err}`));
+    }).catch(err => resp.status(400).json(`Unable to register. ${err}`));
 };
+
 
 module.exports = {
     register: register
-}
+};

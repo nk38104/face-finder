@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+
 const Register = ({ baseURL }) =>  {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");

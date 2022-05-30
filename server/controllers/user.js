@@ -1,6 +1,9 @@
+const res = require("express/lib/response");
 
 const getUsers = (req, resp, database) => {
-    database("users").then(data => resp.send(data));
+    database("users")
+    .then(data => resp.send(data))
+    .catch(err => res.send(err) );
 };
 
 const getUser = (req, resp, database) => {
@@ -11,9 +14,9 @@ const getUser = (req, resp, database) => {
     .then(user => {
         if (user.length) {
             resp.json(user[0])
-        } else {
-            resp.status(400).json("Not found.");
         }
+
+        resp.status(400).json("Not found.");
     });
 };
 
@@ -46,13 +49,14 @@ const deleteUser = (req, resp, database) => {
     database("users")
     .where({ id: id })
     .del()
-    .then(() => resp.status(200).json("User deleted successfully"))
+    .then(() => resp.status(200).json("User deleted successfully."))
     .catch(() => resp.status(400).json("Error while trying to do the operation on db."));
 };
+
 
 module.exports = {
     getUsers:   getUsers,
     getUser:    getUser,
     updateUser: updateUser,
     deleteUser: deleteUser
-}
+};
