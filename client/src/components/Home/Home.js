@@ -13,16 +13,16 @@ const Home = ({ baseURL }) => {
     
     return (isAuthenticated)
         ? (
-            <div>
+            <>
                 <Logo />
                 <Greeting />
                 <ImageContextProvider>
                     <ImageLinkForm baseURL={baseURL} />
                     <Image />
                 </ImageContextProvider>
-            </div>
-        ) 
-        : <Navigate to="/signin" />;
-};
+            </>
+        )
+        : ( <Navigate to="/signin" /> );
+}
  
 export default Home;
