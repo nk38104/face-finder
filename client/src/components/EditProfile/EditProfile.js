@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../contexts/UserContext';
 import Logo from '../Logo/Logo';
 
 
-const EditProfile = () => {
+const EditProfile = ({ baseURL }) => {
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
+    const { update } = useContext(UserContext);
 
     const onSubmitEdit = () => {
-
+        update(username, email, baseURL);
+        navigate("/user-profile");
     }
 
     return (

@@ -25,10 +25,27 @@ const UserContextProvider = ({ children }) => {
 		setUser(initialUserState);
 	}
 
+	const update = async (username, email, baseURL) => {
+		await fetch(`${baseURL}/users/edit/${user.id}`, {
+			method: "put",
+			headers:{"Content-Type": "application/json"},
+			body:  JSON.stringify({
+				username:   username,
+				email:      email
+			})
+		})
+		.then(response => { 
+			if(response.status === 200) {
+				setUser({ ...user, username: username, email: email })
+			}
+		})
+		.catch(err => console.log(err));
+	}
+
 	const incrementEntries = async (baseURL) => {
 		await fetch(`${baseURL}/users/${user.id}`, {
 			method: "put",
-			headers:{"Content-Type": "application/json"},
+			headers:{"Content-Type": "application/json"}
 		})
 		.then(response => response.json())
 		.then(count => { setUser({ ...user, entries: count })})
@@ -36,7 +53,7 @@ const UserContextProvider = ({ children }) => {
 	}
 
     return (
-        <UserContext.Provider value={{ user, login, logout, incrementEntries, isAuthenticated: user.isLogged }}>
+        <UserContext.Provider value={{ user, login, logout, incrementEntries, isAuthenticated: user.isLogged, update }}>
         { children }
         </UserContext.Provider>
     );

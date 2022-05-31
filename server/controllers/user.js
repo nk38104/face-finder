@@ -2,7 +2,7 @@
 const getUsers = (req, resp, database) => {
     database("users")
     .then(data => resp.send(data))
-    .catch(err => res.send(err) );
+    .catch(err => resp.send(err) );
 };
 
 const getUser = (req, resp, database) => {
@@ -26,9 +26,21 @@ const updateUser = (req, resp, database) => {
     .where({ id: id })
     .increment("entries", 1)
     .returning("entries")
-    .then(entries => {
-        resp.json(entries[0]);
+    .then(entries => resp.json(entries[0]))
+    .catch(() => resp.status(400).json("Error while trying to do the operation on db."));
+};
+
+const editUser = (req, resp, database) => {
+    const { id } = req.params;
+    const { username, email } = req.body;
+    
+    database("users")
+    .where({ id: id })
+    .update({
+        username: username,
+        email: email 
     })
+    .then(() => resp.status(200).json("Success"))
     .catch(() => resp.status(400).json("Error while trying to do the operation on db."));
 };
 
@@ -57,5 +69,6 @@ module.exports = {
     getUsers:   getUsers,
     getUser:    getUser,
     updateUser: updateUser,
+    editUser:   editUser,
     deleteUser: deleteUser
 };

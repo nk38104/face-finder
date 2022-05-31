@@ -41,6 +41,7 @@ app.get('/users', (req, resp) => { userController.getUsers(req, resp, database) 
 app.get("/users/:id", (req, resp) => { userController.getUser(req, resp, database) });
 app.put("/users/:id", (req, resp) => { userController.updateUser(req, resp, database) });
 app.delete("/users/:id", (req, resp) => { userController.deleteUser(req, resp, database) });
+app.put("/users/edit/:id", (req, resp) => { userController.editUser(req, resp, database) });
     
 app.post("/signin", (req, resp) => { signinController.signIn(req, resp, database, bcrypt) });
 
