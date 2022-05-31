@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import Logo from '../Logo/Logo';
 
@@ -45,7 +45,10 @@ const UserProfile = ({ baseURL }) => {
                             </div>
                         </fieldset>
                         <div className="">
-                            <input onClick={() => onSubmitDelete()} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Delete Account" />
+                            <input onClick={() => onSubmitDelete()} className="b w-50 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Delete Account" />
+                        </div>
+                        <div className="mt2">
+                            <Link to="/edit-profile" className="b w-50 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib black no-underline">Edit Account</Link>
                         </div>
                     </div>
                 </main>
