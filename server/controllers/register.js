@@ -7,15 +7,19 @@ const register = (req, resp, database, bcrypt) => {
     }
 
     var hash = bcrypt.hashSync(password, 10);
-    
-    database("login")
+
+    console.log(`email: ${email}\nusername: ${username}\npassowrd:${hash}\ndatbase: ${database}`);
+
+    database
     .transaction(trx => {
         trx.insert({
             hash:   hash,
             email:  email
         })
+        .into("login")
         .returning("email")
         .then(loginEmail => {
+            console.log("inside transaction;")
             return trx("users")
             .returning("*")
             .insert({
