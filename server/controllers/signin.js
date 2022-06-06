@@ -17,14 +17,13 @@ const signIn = (req, resp, database, bcrypt) => {
             .where("email", "=", email)
             .then(user => resp.json(user[0]))
             .catch(() => resp.status(400).json("Unable to get user information."));
+        } else {
+            resp.status(400).json("Wrong credentials.");
         }
-
-        resp.status(400).json("Wrong credentials.");
     })
     .catch(() => resp.status(400).json("Wrong credentials."));
 };
 
-
 module.exports = {
     signIn: signIn
-};
+}
