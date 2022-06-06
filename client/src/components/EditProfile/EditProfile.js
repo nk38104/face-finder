@@ -8,10 +8,10 @@ const EditProfile = ({ baseURL }) => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-    const { update } = useContext(UserContext);
+    const { updateUser } = useContext(UserContext);
 
     const onSubmitEdit = () => {
-        update(username, email, baseURL);
+        updateUser(username, email, baseURL);
         navigate("/user-profile");
     }
 

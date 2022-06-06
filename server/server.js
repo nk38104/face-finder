@@ -37,7 +37,9 @@ app.get('/users', (req, resp) => { userController.getUsers(req, resp, database) 
 app.get("/users/:id", (req, resp) => { userController.getUser(req, resp, database) });
 app.put("/users/:id", (req, resp) => { userController.updateUser(req, resp, database) });
 app.delete("/users/:id", (req, resp) => { userController.deleteUser(req, resp, database) });
-    
+// Fix: this is just for fast functionality implementations, late combine with increment
+app.put("/users/edit/:id", (req, resp) => { userController.editUser(req, resp, database) });
+
 app.post("/signin", (req, resp) => { signinController.signIn(req, resp, database, bcrypt) });
 
 app.post("/register", (req, resp) => { registerController.register(req, resp, database, bcrypt) });

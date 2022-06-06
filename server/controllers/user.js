@@ -32,6 +32,22 @@ const updateUser = (req, resp, database) => {
     .catch(() => resp.status(400).json("Error while trying to do the operation on db."));
 };
 
+const editUser = (req, resp, database) => {
+    const { id } = req.params;
+    const { username, email } = req.body;
+
+    database("users")
+    .where({ id: id })
+    .update({
+        username:   username,
+        email:      email
+    }, "*")
+    .then(([user]) => {
+        resp.status(200).send(user);
+    })
+    .catch(() => resp.status(500).send("Erro while user update."));
+}
+
 const deleteUser = (req, resp, database) => {
     const { id } = req.params;
 
@@ -56,5 +72,6 @@ module.exports = {
     getUsers:   getUsers,
     getUser:    getUser,
     updateUser: updateUser,
-    deleteUser: deleteUser
+    deleteUser: deleteUser,
+    editUser:   editUser
 }

@@ -47,6 +47,9 @@ const UserProfile = ({ baseURL }) => {
                         <div className="">
                             <input onClick={() => onSubmitDelete()} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Delete Account" />
                         </div>
+                        <div className="">
+                            <input onClick={() => navigate("/profile/edit")} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Edit Account" />
+                        </div>
                     </div>
                 </main>
             </article>
