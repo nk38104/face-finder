@@ -10,7 +10,7 @@ const UserProfile = ({ baseURL }) => {
     const joined = new Date(user.joined);
 
     const onSubmitDelete = async () => {
-        await fetch(`${baseURL}/users/${user.id}`, {
+        await fetch(`${baseURL}/user/${user.id}`, {
             method: "delete",
             headers:{"Content-Type" : "application/json"},
         })
@@ -45,10 +45,10 @@ const UserProfile = ({ baseURL }) => {
                             </div>
                         </fieldset>
                         <div className="">
-                            <input onClick={() => onSubmitDelete()} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Delete Account" />
+                            <input onClick={() => onSubmitDelete()} className="b w-50 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Delete Account" />
                         </div>
                         <div className="">
-                            <input onClick={() => navigate("/profile/edit")} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Edit Account" />
+                            <input onClick={() => navigate("/profile/edit")} className="b w-50 mt2 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Edit Account" />
                         </div>
                     </div>
                 </main>

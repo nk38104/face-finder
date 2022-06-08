@@ -1,18 +1,15 @@
-const Clarifai  = require('clarifai');
-require('dotenv').config();
+const imageService  = require("../services/image");
 
 
-const clarifai = new Clarifai.App({
-	apiKey: process.env.CLARIFAI_KEY,
-});
-
-const getFaceDetectionData = (req, resp) => {
-    const { imageUrl } = req.body;
-
-    clarifai.models.predict(Clarifai.FACE_DETECT_MODEL, imageUrl)
-    .then(data => resp.json(data))
-    .catch(err => resp.status(400).json(`Unable to work with face detection API!\n${err}`));
+const getFaceDetectionData = async (req, resp) => {
+    try {
+        const imageData = await imageService.getFaceDetectionData(req.body);
+        resp.status(200).send(imageData);
+    } catch (err) {
+        resp.status(err.status).send(err.message);
+    }
 }
+
 
 module.exports = {
     getFaceDetectionData: getFaceDetectionData

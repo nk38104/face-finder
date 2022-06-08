@@ -31,8 +31,8 @@ const Register = ({ baseURL }) =>  {
                     })
         })
         .then(response => response.json())
-        .then(user => {
-            if (user.id) {
+        .then(({ id: userId }) => {
+            if (userId) {
                 navigate("/signin");
             }
         });

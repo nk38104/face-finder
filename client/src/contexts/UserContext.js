@@ -26,21 +26,22 @@ const UserContextProvider = ({ children }) => {
 	}
 
 	const updateUser = async (newUsername, newEmail, baseURL) => {
-		await fetch(`${baseURL}/users/edit/${user.id}`, {
+		await fetch(`${baseURL}/user`, {
 			method: "put",
 			body:	JSON.stringify({
+				id:			user.id,
 				username:	newUsername,
 				email:		newEmail
 			}),
 			headers:{"Content-Type": "application/json"},
 		})
 		.then(response => response.json())
-		.then(user => setUser(user))
+		.then(updatedUser => setUser({ ...updatedUser, isLogged: user.isLogged }))
 		.catch(err => console.log(err));
 	}
 
 	const incrementEntries = async (baseURL) => {
-		await fetch(`${baseURL}/users/${user.id}`, {
+		await fetch(`${baseURL}/user/increment/${user.id}`, {
 			method: "put",
 			headers:{"Content-Type": "application/json"},
 		})

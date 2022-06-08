@@ -1,17 +1,17 @@
 const express   = require("express");
-const bcrypt    = require('bcryptjs');
 const cors      = require("cors");
 const path      = require("path");
-const database  = require('./db/db_context');
-const userController      = require("./controllers/user");
-const registerController  = require("./controllers/register");
-const signinController    = require("./controllers/signin");
-const imageController     = require("./controllers/image");
+const userRouter    = require("./routes/user");
+const authRouter    = require("./routes/auth");
+const imageRouter   = require("./routes/image");
 
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(userRouter.router);
+app.use(authRouter.router);
+app.use(imageRouter.router);
 
 // -------- DEPLOYMENT --------
 if (process.env.NODE_ENV === "production") {
@@ -25,28 +25,14 @@ if (process.env.NODE_ENV === "production") {
     - ENDPOINTS -
     -------------
     /users              --> GET, resp with all users
-    /users/:id          --> GET, resp with user info
-    /users/:id          --> PUT, resp with updated user image detection count
-    /users/:id          --> DELETE, resp with succes || fail
-    /signin             --> POST, resp with user info
-    /register           --> POST, resp with created user info
-    /image-detect       --> POST, resp with face detection data
+    /user/:id           --> GET, resp with user data
+    /user/:id           --> PUT, resp with updated user data
+    /user/increment/:id --> PUT, resp with updated user image detection count
+    /user/:id           --> DELETE, resp with deleted user id
+    /signin             --> POST, resp with user data
+    /register           --> POST, resp with created user data
+    /face-detection     --> POST, resp with face detection data
 */
-
-app.get('/users', (req, resp) => { userController.getUsers(req, resp, database) });
-app.get("/users/:id", (req, resp) => { userController.getUser(req, resp, database) });
-app.put("/users/:id", (req, resp) => { userController.updateUser(req, resp, database) });
-app.delete("/users/:id", (req, resp) => { userController.deleteUser(req, resp, database) });
-// Fix: this is just for fast functionality implementations, late combine with increment
-app.put("/users/edit/:id", (req, resp) => { userController.editUser(req, resp, database) });
-
-app.post("/signin", (req, resp) => { signinController.signIn(req, resp, database, bcrypt) });
-
-app.post("/register", (req, resp) => { registerController.register(req, resp, database, bcrypt) });
-
-
-app.post("/image-detect", (req, resp) => { imageController.getFaceDetectionData(req, resp) });
-
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`App is running on port ${process.env.PORT}.`);

@@ -16,7 +16,7 @@ const ImageLinkForm = ({ baseURL }) => {
     const onImageSubmit  = async () => {
 		setImageUrl(input);
 
-		await fetch(`${baseURL}/image-detect`, {
+		await fetch(`${baseURL}/face-detection`, {
 			method: "post",
 			headers:{"Content-Type": "application/json"},
 			body:   JSON.stringify({
@@ -35,7 +35,7 @@ const ImageLinkForm = ({ baseURL }) => {
     return (
         <div>
             <p className="f3">
-                {'The SmartBrain will detect faces in your images. Give it a try.'}
+                {'The SmartBrain detects faces in your images. Give it a try.'}
             </p>
             <div className="center">
                 <div className="form center pa4 br2 shadow-5 bg-lightest-blue">
