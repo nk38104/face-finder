@@ -40,7 +40,7 @@ const createUser = async (username, email, hash) => {
             })
             .returning("id")
             .then(([user]) => user)
-            .catch((err) => { console.log(err);throw error.InternalServerError; });
+            .catch(() => { throw error.InternalServerError; });
         })
         .then(trx.commit)
         .catch(trx.rollback);  

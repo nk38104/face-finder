@@ -6,10 +6,8 @@ const register = async (req, resp) => {
     console.log("registering...")
     try {
         const id = await userService.createUser(req.body);
-        console.log("id")
         resp.status(200).send(id);
     } catch (err) {
-        console.log(err);
         resp.status(err.status).send(err.message);
     }
 };

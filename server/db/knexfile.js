@@ -1,8 +1,6 @@
 require('dotenv').config();
 
 
-console.log(process.env.DATABASE_URL);
-
 module.exports = {
   development: {
     client:     process.env.DATABASE_CLIENT,
@@ -22,9 +20,15 @@ module.exports = {
   },
 
   production: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
+    client: "pg",
+    connection: {
+      connectionString: process.env.DATABASE_URL,
+      ssl: {
+        rejectUnauthorized: false
+      }
+    },
+    migrations: {
+      tableName: "knex_migrations"
     }
   }
 };
