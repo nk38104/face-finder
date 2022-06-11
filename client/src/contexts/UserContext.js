@@ -26,7 +26,7 @@ const UserContextProvider = ({ children }) => {
 	}
 
 	const updateUser = async (newUsername, newEmail, baseURL) => {
-		await fetch(`${baseURL}/user`, {
+		await fetch(`${baseURL}/api/user`, {
 			method: "put",
 			body:	JSON.stringify({
 				id:			user.id,
@@ -41,7 +41,7 @@ const UserContextProvider = ({ children }) => {
 	}
 
 	const incrementEntries = async (baseURL) => {
-		await fetch(`${baseURL}/user/increment/${user.id}`, {
+		await fetch(`${baseURL}/api/user/increment/${user.id}`, {
 			method: "put",
 			headers:{"Content-Type": "application/json"},
 		})

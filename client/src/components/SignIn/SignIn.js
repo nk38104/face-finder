@@ -18,7 +18,7 @@ const SignIn = ({ baseURL }) => {
     }
 
     const onSubmitSignIn = async () => {
-        await fetch(`${baseURL}/signin`, {
+        await fetch(`${baseURL}/api/signin`, {
             method: "post",
             headers:{"Content-Type" : "application/json"},
             body:   JSON.stringify({

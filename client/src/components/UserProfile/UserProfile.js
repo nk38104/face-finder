@@ -10,7 +10,7 @@ const UserProfile = ({ baseURL }) => {
     const joined = new Date(user.joined);
 
     const onSubmitDelete = async () => {
-        await fetch(`${baseURL}/user/${user.id}`, {
+        await fetch(`${baseURL}/api/user/${user.id}`, {
             method: "delete",
             headers:{"Content-Type" : "application/json"},
         })

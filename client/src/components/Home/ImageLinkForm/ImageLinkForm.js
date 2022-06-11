@@ -16,7 +16,7 @@ const ImageLinkForm = ({ baseURL }) => {
     const onImageSubmit  = async () => {
 		setImageUrl(input);
 
-		await fetch(`${baseURL}/face-detection`, {
+		await fetch(`${baseURL}/api/face-detection`, {
 			method: "post",
 			headers:{"Content-Type": "application/json"},
 			body:   JSON.stringify({

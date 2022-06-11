@@ -21,7 +21,7 @@ const Register = ({ baseURL }) =>  {
     }
 
     const onSubmitRegister = async () => {
-        await fetch(`${baseURL}/register`, {
+        await fetch(`${baseURL}/api/register`, {
             method: "post",
             headers:{"Content-Type" : "application/json"},
             body:   JSON.stringify({
