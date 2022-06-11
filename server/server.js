@@ -13,10 +13,11 @@ app.use(userRouter.router);
 app.use(authRouter.router);
 app.use(imageRouter.router);
 
+
 // -------- DEPLOYMENT --------
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
-    app.get("*", (req, resp) => resp.sendFile(path.resolve(__dirname, "client", "build", "index.html")));
+    app.get("/*", (req, resp) => resp.sendFile(path.resolve(__dirname, "../client/bulid/index.html")));
 }
 // ----------------------------
 
