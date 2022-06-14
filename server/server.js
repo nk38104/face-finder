@@ -17,8 +17,8 @@ app.use(imageRouter.router);
 // -------- DEPLOYMENT --------
 if (process.env.NODE_ENV === "production") {
     // app.use(express.static("client/build"));
-    app.use(express.static(path.resolve(__dirname + "../client/public")));
-    app.get(/.*/, (req, resp) => resp.sendFile(path.resolve(__dirname + "../client/public/index.html")));
+    app.use(express.static(path.resolve(__dirname + "../client/build")));
+    app.get(/.*/, (req, resp) => resp.sendFile(path.resolve(__dirname, "../client/build/index.html")));
 }
 // ----------------------------
 
